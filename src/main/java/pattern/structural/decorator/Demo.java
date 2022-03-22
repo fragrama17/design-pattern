@@ -1,0 +1,22 @@
+package pattern.structural.decorator;
+
+
+public class Demo {
+    public static void main(String[] args) {
+        final String PATH = "C:\\Users\\franc\\OneDrive\\Desktop\\design-pattern\\src\\main\\java\\pattern\\structural\\decorator";
+
+        String salaryRecords = "Name,Salary\nJohn Smith,100000\nSteven Jobs,912000";
+        DataSourceDecorator encoded = new CompressionDecorator(
+                new EncryptionDecorator(
+                        new FileDataSource(PATH + "\\OutputDemo.txt")));
+        encoded.writeData(salaryRecords);
+        DataSource plain = new FileDataSource(PATH + "\\OutputDemo.txt");
+
+        System.out.println("- Input ----------------");
+        System.out.println(salaryRecords);
+        System.out.println("- Encoded --------------");
+        System.out.println(plain.readData());
+        System.out.println("- Decoded --------------");
+        System.out.println(encoded.readData());
+    }
+}
